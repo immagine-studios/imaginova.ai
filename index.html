@@ -3,297 +3,453 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Immagine Studios builds AI-powered software for outdoor living design and visualization. Based in the United States." />
-  <title>Immagine Studios</title>
+  <meta name="description" content="Imaginova builds the operating system for outdoor living professionals: on-site spatial capture, AI-assisted design, and proposals in a single visit." />
+  <meta name="theme-color" content="#120C08" />
+  <title>Imaginova</title>
+
+  <meta property="og:title" content="Imaginova" />
+  <meta property="og:description" content="A rep walks into a backyard. Walks out with a decision." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://imaginova.ai/" />
+
+  <link rel="preload" as="image" href="assets/rep-owner-back-yard.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --ink: #1a1a1a;
-      --ink-mid: #444;
-      --ink-light: #888;
-      --paper: #f7f6f3;
-      --white: #ffffff;
-      --accent: #2d5a3d;
-      --accent-light: #e8f0eb;
-      --rule: #d8d5cf;
-      --max: 1100px;
+      --ink: #120C08;
+      --ink-2: #1A120C;
+      --ink-3: #241811;
+      --cream: #F6ECDE;
+      --cream-2: #EEE3D5;
+      --muted: #B9A794;
+      --muted-2: #C9B7A2;
+      --orange: #F26A34;
+      --orange-2: #FF8B54;
+      --hair: rgba(255,255,255,.09);
+      --max: 1120px;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
     body {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 17px;
-      line-height: 1.7;
-      color: var(--ink);
-      background: var(--white);
+      background: var(--ink);
+      color: var(--cream-2);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 16.5px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* NAV */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--rule);
+    h1, h2, h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      line-height: 1.06;
+      letter-spacing: -.022em;
+      color: #fff;
+      text-wrap: balance;
     }
-    .nav-inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 2rem;
-      height: 64px;
+
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: rgba(242,106,52,.32); }
+    :focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 40px; }
+
+    /* Shared type utilities ------------------------------------------- */
+    .kick {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px 13px;
+    }
+    .kick::before {
+      content: "";
+      width: 26px;
+      height: 2px;
+      background: var(--orange);
+      flex-shrink: 0;
+    }
+    .big {
+      font-size: clamp(31px, 4.6vw, 56px);
+      font-weight: 800;
+      max-width: 19ch;
+      letter-spacing: -.028em;
+    }
+    .sub {
+      font-size: clamp(16.5px, 1.7vw, 20px);
+      color: var(--muted-2);
+      max-width: 58ch;
+      margin-top: 22px;
+      line-height: 1.6;
+    }
+    .sub b { color: #fff; font-weight: 600; }
+    .tag {
+      margin-top: 30px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 11.5px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Nav --------------------------------------------------------------- */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 80;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 16px;
+      padding: 18px 34px;
+      background: linear-gradient(180deg, rgba(10,7,4,.72), rgba(10,7,4,0));
+      backdrop-filter: blur(2px);
     }
-    .nav-logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.2rem;
-      color: var(--ink);
-      text-decoration: none;
-      letter-spacing: 0.01em;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 0.875rem;
-      font-weight: 400;
-      color: var(--ink-mid);
-      text-decoration: none;
-      letter-spacing: 0.03em;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent); }
-
-    /* HERO */
-    .hero {
-      background: var(--paper);
-      border-bottom: 1px solid var(--rule);
-      padding: 7rem 2rem 6rem;
-      text-align: center;
-    }
-    .hero-eyebrow {
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-    }
-    .hero h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.4rem, 5vw, 4rem);
-      line-height: 1.15;
-      color: var(--ink);
-      max-width: 720px;
-      margin: 0 auto 1.5rem;
-    }
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-    .hero-sub {
-      font-size: 1.1rem;
-      color: var(--ink-mid);
-      max-width: 560px;
-      margin: 0 auto 2.5rem;
-      line-height: 1.75;
-    }
-    .hero-cta {
-      display: inline-block;
-      background: var(--accent);
-      color: var(--white);
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      padding: 0.85rem 2rem;
-      border-radius: 2px;
-      transition: background 0.2s;
-    }
-    .hero-cta:hover { background: #1e3f2b; }
-
-    /* SECTION WRAPPER */
-    section {
-      padding: 5rem 2rem;
-    }
-    .inner {
-      max-width: var(--max);
-      margin: 0 auto;
-    }
-    .section-label {
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
-    .section-heading {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      line-height: 1.2;
-      color: var(--ink);
-      margin-bottom: 1.25rem;
-    }
-    .section-body {
-      font-size: 1rem;
-      color: var(--ink-mid);
-      max-width: 620px;
-      line-height: 1.8;
-    }
-
-    /* ABOUT */
-    #about {
-      background: var(--white);
-      border-bottom: 1px solid var(--rule);
-    }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-      margin-top: 3rem;
-    }
-    .about-copy p + p { margin-top: 1rem; }
-    .about-facts {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-    .fact {
-      border-left: 2px solid var(--accent);
-      padding-left: 1.25rem;
-    }
-    .fact-label {
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ink-light);
-      margin-bottom: 0.25rem;
-    }
-    .fact-value {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.1rem;
-      color: var(--ink);
-    }
-
-    /* FOCUS */
-    #focus {
-      background: var(--paper);
-      border-bottom: 1px solid var(--rule);
-    }
-    .focus-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-    .focus-card {
-      background: var(--white);
-      border: 1px solid var(--rule);
-      border-radius: 4px;
-      padding: 2rem;
-    }
-    .focus-card-icon {
-      width: 36px;
-      height: 36px;
-      background: var(--accent-light);
-      border-radius: 4px;
+    .brand {
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin-bottom: 1.25rem;
+      gap: 11px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-shadow: 0 1px 14px rgba(0,0,0,.8);
     }
-    .focus-card-icon svg {
-      width: 18px;
-      height: 18px;
-      stroke: var(--accent);
-      fill: none;
-      stroke-width: 1.75;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+    .brand .mark {
+      width: 11px; height: 11px;
+      background: var(--orange);
+      border-radius: 2px;
+      flex-shrink: 0;
     }
-    .focus-card h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.15rem;
-      color: var(--ink);
-      margin-bottom: 0.6rem;
+    .nav-links { display: flex; gap: 30px; list-style: none; }
+    .nav-links a {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+      transition: color .2s;
+      text-shadow: 0 1px 14px rgba(0,0,0,.8);
     }
-    .focus-card p {
-      font-size: 0.9rem;
-      color: var(--ink-mid);
-      line-height: 1.75;
+    .nav-links a:hover { color: var(--orange); }
+
+    /* Hero -------------------------------------------------------------- */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      isolation: isolate;
+      border-bottom: 1px solid var(--hair);
+    }
+    /* Hero photography. Swap the image here to change the scene. */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-color: #150E09;
+      background-image: url("assets/rep-owner-back-yard.webp");
+      background-size: cover;
+      background-position: center 25%;  /* keeps heads clear of the top crop on short, wide windows */
+    }
+    .hero-glow {
+      position: absolute;
+      left: 50%; bottom: 0;
+      width: 140vw; height: 78vh;
+      transform: translateX(-50%);
+      background: radial-gradient(58% 72% at 50% 100%, rgba(242,106,52,.20), rgba(242,106,52,.06) 42%, transparent 74%);
+      z-index: 3;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+    /* CSS ground plane. A scanned-yard motif that needs no photograph. */
+    .hero-grid {
+      position: absolute;
+      left: -60%; right: -60%; bottom: -2px;
+      height: 62vh;
+      z-index: 2;
+      background-image:
+        repeating-linear-gradient(90deg, rgba(255,150,100,.16) 0 1px, transparent 1px 84px),
+        repeating-linear-gradient(0deg,  rgba(246,236,222,.08) 0 1px, transparent 1px 84px);
+      transform: perspective(430px) rotateX(74deg);
+      transform-origin: bottom center;
+      -webkit-mask-image: linear-gradient(to top, #000 4%, rgba(0,0,0,.55) 34%, transparent 76%);
+      mask-image: linear-gradient(to top, #000 4%, rgba(0,0,0,.55) 34%, transparent 76%);
+      pointer-events: none;
+    }
+    .hero-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(to right, rgba(10,7,4,.93), rgba(10,7,4,.60) 50%, rgba(10,7,4,.30) 80%),
+        linear-gradient(to top, rgba(10,7,4,.60) 0%, rgba(10,7,4,.26) 42%, rgba(10,7,4,.62) 100%);
+      pointer-events: none;
+    }
+    .hero .wrap { position: relative; z-index: 4; padding-top: 120px; padding-bottom: 96px; }
+    .hero h1 {
+      font-size: clamp(40px, 7.4vw, 92px);
+      font-weight: 800;
+      letter-spacing: -.035em;
+      line-height: .99;
+      max-width: 16ch;
+      text-shadow: 0 4px 46px rgba(0,0,0,.5);
+    }
+    .hero h1 .l2 { display: block; color: var(--orange); }
+    .hero .sub { max-width: 54ch; }
+
+    .scrollcue {
+      position: absolute;
+      left: 50%; bottom: 30px;
+      transform: translateX(-50%);
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 9px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 10px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+      opacity: .85;
+    }
+    .scrollcue .ln {
+      width: 1px; height: 32px;
+      background: linear-gradient(var(--muted-2), transparent);
+      animation: cue 1.8s ease-in-out infinite;
+    }
+    @keyframes cue {
+      0%, 100% { opacity: .3; transform: scaleY(.6); }
+      50%      { opacity: 1;  transform: scaleY(1); }
     }
 
-    /* COMPANY */
-    #company {
-      background: var(--white);
-      border-bottom: 1px solid var(--rule);
+    /* Bands ------------------------------------------------------------- */
+    .band {
+      position: relative;
+      border-top: 1px solid var(--hair);
+      padding: clamp(76px, 10vw, 132px) 0;
     }
+    .band.alt { background: var(--ink-2); }
+
+    /* Photographic bands. The gradient is listed first so it paints above
+       the image. Both sit behind the .wrap content, which is positioned. */
+    .band.photo {
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+    .band.photo .wrap { position: relative; z-index: 2; }
+
+    #problem.photo {
+      background-image:
+        linear-gradient(to right, rgba(10,7,4,.94) 0%, rgba(10,7,4,.70) 46%, rgba(10,7,4,.38) 100%),
+        linear-gradient(to top, rgba(10,7,4,.58), rgba(10,7,4,.34)),
+        url("assets/measuring-back-yard.webp");
+    }
+
+    #contact.photo {
+      background-image:
+        linear-gradient(to right, rgba(10,7,4,.94) 0%, rgba(10,7,4,.74) 52%, rgba(10,7,4,.52) 100%),
+        linear-gradient(to top, rgba(10,7,4,.78), rgba(10,7,4,.48)),
+        url("assets/walk-away.webp");
+      background-position: center 38%;
+    }
+
+    /* Problem ----------------------------------------------------------- */
+    .rule-list {
+      margin-top: 44px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 34px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 11.5px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .rule-list span { position: relative; padding-left: 20px; }
+    .rule-list span::before {
+      content: "";
+      position: absolute;
+      left: 0; top: .62em;
+      width: 10px; height: 1px;
+      background: var(--orange);
+    }
+
+    /* Steps ------------------------------------------------------------- */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 26px;
+      margin-top: 54px;
+    }
+    .step {
+      border-top: 2px solid rgba(242,106,52,.55);
+      padding-top: 22px;
+    }
+    .step .n {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 14px;
+      display: block;
+    }
+    .step h3 {
+      font-size: clamp(19px, 1.9vw, 24px);
+      margin-bottom: 11px;
+      line-height: 1.15;
+    }
+    .step p { font-size: 15.5px; color: var(--muted-2); line-height: 1.62; }
+
+    /* Triad ------------------------------------------------------------- */
+    .triad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 34px;
+      margin-top: 52px;
+    }
+    .tcell .bar {
+      width: 34px; height: 3px;
+      background: var(--orange);
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+    .tcell h3 {
+      font-size: clamp(20px, 2.1vw, 27px);
+      margin-bottom: 12px;
+      line-height: 1.12;
+    }
+    .tcell p { font-size: 15.5px; color: var(--muted-2); line-height: 1.62; }
+
+    /* Company ----------------------------------------------------------- */
     .company-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      margin-top: 3rem;
+      gap: 46px;
+      margin-top: 46px;
     }
-    .company-body p + p { margin-top: 1rem; }
+    .company-grid p { color: var(--muted-2); }
+    .company-grid p + p { margin-top: 1rem; }
 
-    /* CONTACT */
-    #contact {
-      background: var(--accent);
-      color: var(--white);
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 26px;
+      margin-top: 58px;
+      padding-top: 38px;
+      border-top: 1px solid var(--hair);
     }
-    #contact .section-label { color: rgba(255,255,255,0.55); }
-    #contact .section-heading { color: var(--white); }
-    #contact .section-body { color: rgba(255,255,255,0.75); max-width: 480px; }
+    .fact-label {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 10.5px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .fact-value {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.25;
+    }
+
+    /* Contact ----------------------------------------------------------- */
+    #contact { position: relative; overflow: hidden; }
+    #contact::after {
+      content: "";
+      position: absolute;
+      left: 50%; bottom: -55%;
+      width: 120vw; height: 100%;
+      transform: translateX(-50%);
+      background: radial-gradient(50% 60% at 50% 100%, rgba(242,106,52,.20), transparent 70%);
+      pointer-events: none;
+    }
+    #contact .wrap { position: relative; z-index: 2; }
     .contact-link {
       display: inline-block;
-      margin-top: 2rem;
-      color: var(--white);
-      font-weight: 500;
-      font-size: 1.05rem;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.4);
-      padding-bottom: 2px;
-      transition: border-color 0.2s;
+      margin-top: 32px;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(24px, 3.4vw, 40px);
+      font-weight: 600;
+      color: #fff;
+      border-bottom: 2px solid rgba(242,106,52,.6);
+      padding-bottom: 5px;
+      transition: border-color .2s, color .2s;
     }
-    .contact-link:hover { border-color: var(--white); }
+    .contact-link:hover { border-color: var(--orange); color: var(--orange-2); }
 
-    /* FOOTER */
+    /* Footer ------------------------------------------------------------ */
     footer {
-      background: var(--ink);
-      padding: 2rem;
+      border-top: 1px solid var(--hair);
+      padding: 34px 40px;
       text-align: center;
     }
     footer p {
-      font-size: 0.8rem;
-      color: var(--ink-light);
-      letter-spacing: 0.04em;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 10.5px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
 
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
+    /* Responsive -------------------------------------------------------- */
+    @media (max-width: 900px) {
+      /* Narrow viewports have no width for a side-to-side falloff, so the
+         photographic scrims go vertical and heavier to hold text contrast. */
+      .hero-scrim {
+        background: linear-gradient(to top, rgba(10,7,4,.93) 0%, rgba(10,7,4,.60) 46%, rgba(10,7,4,.82) 100%);
+      }
+      #problem.photo {
+        background-image:
+          linear-gradient(to top, rgba(10,7,4,.90), rgba(10,7,4,.74)),
+          url("assets/measuring-back-yard.webp");
+      }
+      #contact.photo {
+        background-image:
+          linear-gradient(to top, rgba(10,7,4,.90), rgba(10,7,4,.72)),
+          url("assets/walk-away.webp");
+      }
+
+      .steps { grid-template-columns: repeat(2, 1fr); gap: 30px 26px; }
+      .triad, .company-grid { grid-template-columns: 1fr; gap: 30px; }
+      .facts { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    }
+    @media (max-width: 640px) {
+      .wrap { padding: 0 22px; }
+      nav { padding: 15px 22px; }
       .nav-links { display: none; }
-      .about-grid,
-      .focus-grid,
-      .company-grid { grid-template-columns: 1fr; gap: 2rem; }
-      section { padding: 3.5rem 1.5rem; }
-      .hero { padding: 4rem 1.5rem 3.5rem; }
+      .steps { grid-template-columns: 1fr; }
+      .facts { grid-template-columns: 1fr; }
+      .band { padding: 62px 0; }
+      .scrollcue { display: none; }
+      .kick { letter-spacing: .18em; font-size: 11px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      * { transition: none !important; }
+      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      html { scroll-behavior: auto; }
     }
   </style>
 </head>
@@ -301,123 +457,154 @@
 
   <!-- NAV -->
   <nav>
-    <div class="nav-inner">
-      <a class="nav-logo" href="#">Immagine Studios</a>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#focus">Focus</a></li>
-        <li><a href="#company">Company</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
+    <a class="brand" href="#"><span class="mark" aria-hidden="true"></span>Imaginova</a>
+    <ul class="nav-links">
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#product">Product</a></li>
+      <li><a href="#company">Company</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
   </nav>
 
   <!-- HERO -->
   <header class="hero">
-    <p class="hero-eyebrow">Immagine Studios, LLC</p>
-    <h1>Software for how outdoor spaces are <em>designed</em> and delivered.</h1>
-    <p class="hero-sub">We build AI-powered tools that help professionals design, visualize, and present outdoor environments — faster and with greater confidence.</p>
-    <a class="hero-cta" href="#contact">Get in touch</a>
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="kick">The operating system for outdoor living</p>
+      <h1>A rep walks into a backyard.<span class="l2">Walks out with a decision.</span></h1>
+      <p class="sub">Imaginova builds the software that turns a site visit into a signed proposal: capture, design, and pricing in one connected flow, while everyone is still standing in the yard.</p>
+      <p class="tag">Active development &nbsp;·&nbsp; United States</p>
+    </div>
+    <div class="scrollcue" aria-hidden="true"><span>Scroll</span><span class="ln"></span></div>
   </header>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="inner">
-      <p class="section-label">About</p>
-      <h2 class="section-heading">Technology built for the outdoor living industry.</h2>
-      <div class="about-grid">
-        <div class="about-copy section-body">
-          <p>Immagine Studios is a software company focused on transforming how outdoor environments are designed, visualized, and sold. We develop tools that combine spatial technology, artificial intelligence, and real-time visualization to help professionals work more effectively.</p>
-          <p>Our platform is designed to compress the time between a site visit and a signed proposal — giving sales and design teams a more powerful, professional experience from the first conversation with a homeowner.</p>
-          <p>We are currently in active development, working closely with industry partners to bring our first product to market.</p>
+  <!-- PROBLEM -->
+  <section class="band photo" id="problem">
+    <div class="wrap">
+      <p class="kick">The problem</p>
+      <h2 class="big">Right now, the design waits.</h2>
+      <p class="sub">The yard gets measured by hand. The proposal gets built later, back at a desk, from photos and memory. By the time it comes back, the moment of belief is gone.</p>
+      <div class="rule-list">
+        <span>Hours of setup</span>
+        <span>Disconnected tools</span>
+        <span>Stitched together after the visit</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT -->
+  <section class="band alt" id="product">
+    <div class="wrap">
+      <p class="kick">What we build</p>
+      <h2 class="big">One visit, start to finish.</h2>
+      <p class="sub">Imaginova turns the traditional backyard sales process into a single connected experience: accurate site capture, design exploration, customer collaboration, and a proposal, instead of disconnected tools stitched together after the fact.</p>
+
+      <div class="steps">
+        <div class="step">
+          <span class="n">01 &middot; Scan</span>
+          <h3>Scan the real yard.</h3>
+          <p>The rep captures the backyard on an iPad, on site. The space is measured where it stands, instead of being recreated later from guesswork.</p>
         </div>
-        <div class="about-facts">
-          <div class="fact">
-            <p class="fact-label">Founded</p>
-            <p class="fact-value">2025</p>
-          </div>
-          <div class="fact">
-            <p class="fact-label">Headquarters</p>
-            <p class="fact-value">United States</p>
-          </div>
-          <div class="fact">
-            <p class="fact-label">Stage</p>
-            <p class="fact-value">Active Development</p>
-          </div>
-          <div class="fact">
-            <p class="fact-label">Sector</p>
-            <p class="fact-value">Outdoor Living &amp; Home Improvement</p>
-          </div>
+        <div class="step">
+          <span class="n">02 &middot; Design</span>
+          <h3>Design on the actual lot.</h3>
+          <p>The design sits on real property imagery, not a blank canvas. What the homeowner sees is their own yard, with the plan on top of it.</p>
+        </div>
+        <div class="step">
+          <span class="n">03 &middot; Explore</span>
+          <h3>Options that respect the rules.</h3>
+          <p>AI assistance proposes layouts, and options are checked against setbacks and property boundaries, with measurement confidence visible on screen.</p>
+        </div>
+        <div class="step">
+          <span class="n">04 &middot; Decide</span>
+          <h3>Leave with a decision.</h3>
+          <p>A branded proposal built on the contractor's own pricing, plus a dimensioned plan, in the homeowner's hands before the rep drives away.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOCUS -->
-  <section id="focus">
-    <div class="inner">
-      <p class="section-label">What We Build</p>
-      <h2 class="section-heading">Three capabilities, one seamless workflow.</h2>
-      <div class="focus-grid">
-        <div class="focus-card">
-          <div class="focus-card-icon">
-            <!-- Spatial / scan icon -->
-            <svg viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/></svg>
-          </div>
-          <h3>Spatial Measurement</h3>
-          <p>Our software uses mobile AR to capture accurate measurements of an outdoor space during a site visit — no manual takeoffs or return trips required.</p>
+  <!-- WHY -->
+  <section class="band">
+    <div class="wrap">
+      <p class="kick">Why it holds</p>
+      <h2 class="big">Capture once, on site. Everything downstream stays true to it.</h2>
+
+      <div class="triad">
+        <div class="tcell">
+          <div class="bar" aria-hidden="true"></div>
+          <h3>Capture, not recreate.</h3>
+          <p>The real yard is captured the moment the rep is standing in it, so nothing has to be rebuilt from memory later.</p>
         </div>
-        <div class="focus-card">
-          <div class="focus-card-icon">
-            <!-- Design icon -->
-            <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-          </div>
-          <h3>AI-Assisted Design</h3>
-          <p>Artificial intelligence helps generate and refine outdoor living designs in real time, giving professionals a head start and homeowners an immediate visual to react to.</p>
+        <div class="tcell">
+          <div class="bar" aria-hidden="true"></div>
+          <h3>Fewer errors, less rework.</h3>
+          <p>Keeping the layout grounded in the real yard during the visit cuts guessed dimensions and redraws after the fact. Field verification still happens before construction.</p>
         </div>
-        <div class="focus-card">
-          <div class="focus-card-icon">
-            <!-- Proposal icon -->
-            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          </div>
-          <h3>Proposals &amp; Pricing</h3>
-          <p>The platform generates professional proposals with real-time pricing, so a sales team can leave a homeowner's property with a complete, signed agreement in hand.</p>
+        <div class="tcell">
+          <div class="bar" aria-hidden="true"></div>
+          <h3>One flow, lower cost.</h3>
+          <p>Capture, design, collaboration, and proposal collapse into a single visit, which means less operational cost per opportunity.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- COMPANY -->
-  <section id="company">
-    <div class="inner">
-      <p class="section-label">Company</p>
-      <h2 class="section-heading">Building with purpose from day one.</h2>
+  <section class="band alt" id="company">
+    <div class="wrap">
+      <p class="kick">Company</p>
+      <h2 class="big">Built with purpose from day one.</h2>
+
       <div class="company-grid">
-        <div class="company-body section-body">
-          <p>Immagine Studios was founded in 2025 with a clear thesis: the outdoor living industry deserves purpose-built software that reflects how professionals actually work. Most design and sales tools used today were built for other industries and adapted imperfectly.</p>
-          <p>We are a small, focused team combining deep experience in software, sales technology, and spatial computing. We work with a select group of early industry partners to make sure what we build solves real problems in the real world.</p>
+        <div>
+          <p>Imaginova is a software company focused on transforming how outdoor environments are designed, visualized, and sold. We develop tools that combine spatial technology, artificial intelligence, and real-time visualization to help professionals work more effectively.</p>
+          <p>We founded the company in 2025 on a clear thesis: the outdoor living industry deserves purpose-built software that reflects how professionals actually work. Most design and sales tools used today were built for other industries and adapted imperfectly.</p>
         </div>
-        <div class="company-body section-body">
-          <p>Our approach is deliberate. Rather than building broadly and quickly, we are developing a complete, production-grade platform that is reliable, easy to use in the field, and designed to scale across an organization of any size.</p>
-          <p>Immagine Studios, LLC is a registered limited liability company operating in the United States.</p>
+        <div>
+          <p>We are a small, focused team combining deep experience in software, sales technology, and spatial computing. We work with a select group of early industry partners to make sure what we build solves real problems in the real world.</p>
+          <p>Our approach is deliberate. Rather than building broadly and quickly, we are developing a production-grade platform that is reliable, easy to use in the field, and designed to scale across an organization of any size.</p>
+          <p>Imaginova, LLC is a registered limited liability company operating in the United States.</p>
+        </div>
+      </div>
+
+      <div class="facts">
+        <div>
+          <p class="fact-label">Founded</p>
+          <p class="fact-value">2025</p>
+        </div>
+        <div>
+          <p class="fact-label">Headquarters</p>
+          <p class="fact-value">United States</p>
+        </div>
+        <div>
+          <p class="fact-label">Stage</p>
+          <p class="fact-value">Active Development</p>
+        </div>
+        <div>
+          <p class="fact-label">Sector</p>
+          <p class="fact-value">Outdoor Living</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact">
-    <div class="inner">
-      <p class="section-label">Contact</p>
-      <h2 class="section-heading">We'd like to hear from you.</h2>
-      <p class="section-body">Whether you're an industry partner, potential customer, or exploring a collaboration — reach out and we'll be in touch promptly.</p>
-      <a class="contact-link" href="mailto:hello@immaginestudios.tech">hello@immaginestudios.tech</a>
+  <section class="band photo" id="contact">
+    <div class="wrap">
+      <p class="kick">Contact</p>
+      <h2 class="big">We'd like to hear from you.</h2>
+      <p class="sub">Whether you're an industry partner, a potential customer, or exploring a collaboration, reach out and we'll be in touch promptly.</p>
+      <a class="contact-link" href="mailto:hello@imaginova.ai">hello@imaginova.ai</a>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <p>© 2025 Immagine Studios, LLC &nbsp;·&nbsp; immaginestudios.tech &nbsp;·&nbsp; All rights reserved.</p>
+    <p>© 2026 Imaginova, LLC &nbsp;·&nbsp; imaginova.ai &nbsp;·&nbsp; All rights reserved.</p>
   </footer>
 
 </body>
